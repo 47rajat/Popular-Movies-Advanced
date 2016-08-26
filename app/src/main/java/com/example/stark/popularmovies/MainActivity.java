@@ -2,20 +2,59 @@ package com.example.stark.popularmovies;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainActivityFragment.Callback {
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String DETAIL_FRAGMENT_TAG = "DTAG";
+    private static final String SORTING_ORDER = "Sorting";
+    private boolean mTwoPane;
+    private String mSortOrder;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String sortOrder = Utility.getSortingOrder(this);
+        if(mTwoPane && !sortOrder.equals(mSortOrder)){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_detail, new NoItemSelectedFragment())
+                    .commit();
+            mSortOrder = sortOrder;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(findViewById(R.id.fragment_detail) != null){
+            mTwoPane = true;
+            if(savedInstanceState == null){
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_detail, new NoItemSelectedFragment(), DETAIL_FRAGMENT_TAG)
+                        .commit();
+            } else {
+                mSortOrder = savedInstanceState.getString(SORTING_ORDER);
+            }
+        }else {
+            mTwoPane = false;
+//            getSupportActionBar().setElevation(0f);
+        }
         setSupportActionBar(toolbar);
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if(mTwoPane && mSortOrder != null){
+            outState.putString(SORTING_ORDER, mSortOrder);
+        }
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -39,5 +78,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onItemSelected(Parcelable parcelable) {
+        if(mTwoPane){
+            Bundle args = new Bundle();
+            args.putParcelable(DetailActivityFragment.DETAIL_PARCELABLE, parcelable);
+
+            DetailActivityFragment detailActivityFragment = new DetailActivityFragment();
+            detailActivityFragment.setArguments(args);
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_detail, detailActivityFragment, DETAIL_FRAGMENT_TAG)
+                    .commit();
+        } else {
+            Intent intent = new Intent(this, DetailActivity.class).putExtra(Intent.EXTRA_TEXT, parcelable);
+            startActivity(intent);
+        }
     }
 }

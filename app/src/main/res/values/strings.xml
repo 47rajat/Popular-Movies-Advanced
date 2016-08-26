@@ -1,11 +1,20 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">Popular Movies</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="content_authority">com.example.stark.popularmovies</string>
 
     <string name="sort_pref_type">Sort Movies by</string>
     <string name="pref_sort_key">pref_sort_key</string>
-    <string name="pref_sort_default_key">popular</string>
+    <string name="pref_sort_default_value">popular</string>
     <string name="title_activity_main2">Popular Movies</string>
     <string name="text_appearance">bold</string>
+    <string name="add_to_fav">Add To Favourites</string>
+    <string name="remove_from_fav">Remove From Favourites</string>
+    <string name="trailer_tag">Trailers:</string>
+    <string name="review_tag">Reviews:</string>
+    <string name="no_selection">Nothing Selected!</string>
+    <string name="format_rating"><xliff:g id="rating">%1.1f</xliff:g>/10</string>
+    <string name="added_to_fav_message">Added to Favourites</string>
+    <string name="removed_from_fav_message">Removed from Favourites</string>
 </resources>

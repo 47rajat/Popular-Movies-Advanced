@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.stark.popularmovies"
-        minSdkVersion 10
+        minSdkVersion 11
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -16,6 +16,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    buildTypes.each {
+        it.buildConfigField 'String', 'MOVIE_DATABASE_API', 'Your API Key'
     }
 }
 

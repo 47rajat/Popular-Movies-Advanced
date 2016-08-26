@@ -12,6 +12,17 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState == null){
+            Bundle args = new Bundle();
+            args.putParcelable(DetailActivityFragment.DETAIL_PARCELABLE, getIntent().getParcelableExtra(Intent.EXTRA_TEXT));
+
+            DetailActivityFragment detailActivityFragment = new DetailActivityFragment();
+            detailActivityFragment.setArguments(args);
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_detail, detailActivityFragment)
+                    .commit();
+        }
         setContentView(R.layout.detail_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

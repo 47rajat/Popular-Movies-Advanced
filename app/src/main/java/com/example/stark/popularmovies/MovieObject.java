@@ -13,13 +13,15 @@ public class MovieObject implements Parcelable{
     String plot;
     String releaseDate;
     float rating;
+    long movieId;
 
-    MovieObject(String Title, String Poster, String Plot, String ReleaseDate, float Rating){
+    MovieObject(String Title, String Poster, String Plot, String ReleaseDate, float Rating,long id){
         this.title = Title;
         this.thumbnail = Poster;
         this.plot = Plot;
         this.releaseDate = ReleaseDate;
         this.rating = Rating;
+        this.movieId = id;
     }
 
     public MovieObject(Parcel parcel) {
@@ -28,6 +30,7 @@ public class MovieObject implements Parcelable{
         this.plot = parcel.readString();
         this.releaseDate = parcel.readString();
         this.rating = parcel.readFloat();
+        this.movieId = parcel.readLong();
     }
 
     @Override
@@ -42,6 +45,7 @@ public class MovieObject implements Parcelable{
         parcel.writeString(plot);
         parcel.writeString(releaseDate);
         parcel.writeFloat(rating);
+        parcel.writeLong(movieId);
 
     }
 

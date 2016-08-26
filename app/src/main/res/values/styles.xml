@@ -16,9 +16,11 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-    <style name="DetailView">
-        <item name="android:textSize">25sp</item>
-        <item name="android:textAppearance">@string/text_appearance</item>
-        <item name="android:textColor">@color/darkFont</item>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/light_grey</item>
+        <item name="android:layout_margin">16dp</item>
     </style>
 </resources>

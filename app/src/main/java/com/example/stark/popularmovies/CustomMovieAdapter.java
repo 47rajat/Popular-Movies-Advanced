@@ -33,7 +33,11 @@ public class CustomMovieAdapter extends ArrayAdapter<MovieObject> {
         }
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.grid_item_movie_icon);
-        Picasso.with(getContext()).load(movieObject.thumbnail).into(imageView);
+        Picasso.with(getContext())
+                .load(movieObject.thumbnail)
+                .placeholder(R.drawable.ic_sync_black_24dp)
+                .error(R.drawable.ic_info_black_24dp)
+                .into(imageView);
 
         return convertView;
     }

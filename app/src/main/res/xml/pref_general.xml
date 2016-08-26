@@ -3,7 +3,7 @@
     android:layout_height="match_parent">
 
     <ListPreference
-        android:defaultValue="@string/pref_sort_default_key"
+        android:defaultValue="@string/pref_sort_default_value"
         android:entries="@array/pref_sorting_types"
         android:entryValues="@array/pref_sorting_values"
         android:dialogTitle="@string/sort_pref_type"
